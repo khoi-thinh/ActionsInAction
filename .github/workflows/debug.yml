@@ -1,14 +1,26 @@
-name: Debug enable
+name: Deploy to Docker Hub
 
 on:
   push:
     branches:
       - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKER_AUTH_TOKEN }}"
+        run: echo "$DOCKER_AUTH_TOKEN" | docker login --username "$DOCKER_USERNAME" --password-stdin
+
+      - name: Build Docker image
+        run: docker build -t myuser/myapp:latest .
+
+      - name: Push Docker image to Docker Hub
+        run: docker push myuser/myapp:latest
+
 
 
