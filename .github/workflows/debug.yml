@@ -1,0 +1,6 @@
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log in to Docker
+        run: echo "$DOCKER_AUTH_TOKEN" | docker login --username myuser --password-stdin
