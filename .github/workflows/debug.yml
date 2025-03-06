@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKER_AUTH_TOKEN }}" | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        run: echo "${{ secrets.DOCKER_AUTH_TOKEN }}"
 
 
