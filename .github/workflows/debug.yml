@@ -1,6 +1,14 @@
+name: Debug enable
+
+on:
+  push:
+    branches:
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Log in to Docker
-        run: echo "$DOCKER_AUTH_TOKEN" | docker login --username myuser --password-stdin
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_AUTH_TOKEN }}" | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+
