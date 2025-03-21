@@ -1,8 +1,30 @@
-name: Hello World
-'on': push
+name: Deploy Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Trigger on changes to the main branch
+
 jobs:
-  hello-job:
+  deploy-dev:
     runs-on: ubuntu-latest
+    environment: dev  # Deploy to the dev environment
     steps:
-      - name: Echo text
-        run: 'echo "Hello, world!"'
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Dev
+        run: |
+          echo "Deploying to Dev..."
+
+  deploy-prod:
+    runs-on: ubuntu-latest
+    environment: prod  
+    needs: deploy-dev  
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Prod
+        run: |
+          echo "Deploying to Prod..."
